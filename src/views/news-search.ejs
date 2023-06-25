@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>HomexGrown</title>
+</head>
+<body>
+    <header class="nav-head">
+        <nav class="main-nav">
+			<!-- The hamburger menu is created here but the display is initially hidden -->
+            <div class="hamburger">
+                <li><i class="fa-solid fa-bars"></i></li>
+            </div>
+            <ul class="nav-left">
+                <li><a href="shop.html" class="nav-link">HOME</a></li>
+                <li><a href="tops.html" class="nav-link">SUPPORT</a></li>
+                <li><a href="bottoms.html" class="nav-link">ABOUT</a></li>
+                <li><a href="accessories.html" class="nav-link">REGISTER/LOGIN</a></li>    
+            </ul>
+            <!-- <ul class="nav-middle">
+                <li class="middle-link"><a href="index.html"><img src="/images/hglogo.avif" alt="" class="head-logo"></a></li>
+            </ul> -->
+           <ul class="nav-right">
+            <li><img src="/img/Hope4Changelogo.png" alt="" class="head-logo"></li>
+           </ul>
+        </nav>
+    
+	<main>
+		 <!-- DRE CODE -->
+		 <div class="heroimg">
+			<section class="herotext">
+				<h1>Hope<br>4<br>Change</h1>
+				<img src="/public/" alt=""/>
+			</section>
+		</div>
+		<section class="knowledgeHub">
+			<h1>Knowledge Hub</h1>
+			<p>Welcome to Hope 4 Change's Knowledge Hub, a comprehensive resource center dedicated to shedding light on oppressive topics and fostering awareness and understanding. Here, we believe that knowledge is power, and by exploring the issues that perpetuate oppression, we can ignite conversations, challenge societal norms, and pave the way for meaningful change. Through our carefully curated dropdown menu, you can delve into a diverse range of topics, from systemic racism and gender inequality to environmental injustice and social discrimination. Our aim is to equip you with the information and insights needed to navigate these complex issues, enabling you to become a catalyst for positive transformation in your community and beyond. Together, let's break down barriers, cultivate empathy, and forge a path towards a more equitable and inclusive world.</p>
+		</section>
+		<section class="formback">
+			<form action="/newssearch" method="GET" class="homeForm">
+				<label for="issue" class="homeLabel">Select an issue:</label>
+				<select name="issue" id="issue" class="homeSelect">
+				<option value="lgbt">LGBT</option>
+				<option value="poverty">Poverty</option>
+				<option value="immigrants">Immigrants</option>
+				<option value="racial-justice">Racial Justice</option>
+				<option value="veterans">Veterans</option>
+				<option value="voting-rights">Voting Rights</option>
+				<option value="disabilities">Disabilities</option>
+				<option value="gender-equality">Gender Equality</option>
+				</select>
+				<br>
+				<button type="submit" class="homeButton">Submit</button>
+			</form>
+			</form>
+		</section> 
+		<div class="articles">
+			
+			<% for (let i = 0; i < articles.length; i++) { %>
+				<div class="article">
+					<h2 class="article-title"><%= articles[i].title %></h2>
+					<a target="_blank" href=<%= articles[i].url %><p class="article-desc"><%= articles[i].url %></p></a>
+				</div>
+			  <% } %>
+			
+
+		</div>
+	</main>
+    
+<!-- footer, use on every page -->
+<footer class="main-footer">
+	<div class="footer-top">
+		<ul class="foot-list-vert">
+			<li><a href="#" class="footer-link1">sign up for email</a></li>
+			<li><a href="#" class="footer-link1">become a member</a></li>
+			<li><a href="#" class="footer-link1">hope4change book</a></li>
+			<li><a href="#" class="footer-link1">send us feedback</a></li>
+		</ul>
+
+		<ul class="foot-list-vert">
+			<li><a href="help.html" class="footer-link1">Contact</a></li>
+			<li><a href="#" class="footer-link2">123-456-7890</a></li>
+			<li><a href="#" class="footer-link2">Example@gmail.com</a></li>
+			<li><a href="#" class="footer-link2">123 Example st, Charlotte, NC</a></li>
+		</ul>
+
+		<ul class="foot-list-vert">
+			<li><a href="#" class="footer-link1">About Hope4Change</a></li>
+			<li><a href="#" class="footer-link2">News</a></li>
+			<li><a href="#" class="footer-link2">Careers</a></li>
+			<li><a href="#" class="footer-link2">Investors</a></li>
+		</ul>
+
+		<ul class="footer-list-social">
+			<li class="footer-item"><a href="https://www.facebook.com/" target="_blank" aria-label="facebook link" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
+			<li class="footer-item"><a href="https://twitter.com/" target="_blank" aria-label="twitter link" class="social-icon"><i class="fa-brands fa-twitter"></i></a></li>
+			<li class="footer-item"><a href="https://www.instagram.com/thehomexgrown/" target="_blank" aria-label="instagram link" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
+		</ul>
+	</div>
+	<div class="footer-bottom">
+		<div class="footer-bottom-left">
+			<div class="fbl-left1">
+				<i class="fa-solid fa-location-dot"></i>
+				<p class="fblp">United States</p>
+			</div>
+			<div class="fbl-left2">
+				<p class="copyright">&copy; 2023 Hope4Change All Rights Reserved</p>
+			</div>
+		</div>
+		<div class="footer-bottom-right">
+			<div class="fbr-top">
+				<ul class="fbr-list">
+					<li><p>Terms of Sale</p></li>
+					<li><p>Terms of Use</p></li>
+					<li><p>H4C Privacy Policy</p></li>
+					<li><p>Your Privacy Choices</p></li>
+				</ul>
+			</div>
+			<br>
+			<!-- <div class="fbr-bottom">
+				<p>NC Supply Chains Act</p>
+			</div> -->
+
+		</div>
+	</div>
+</footer>
+
+    <script>
+		//Hamburger Menu
+		const hamburger = document.querySelector(".hamburger");
+		const navigation = document.querySelector(".nav-left");
+
+		// click event adds the class of active to display the hidden nav menu
+		hamburger.addEventListener("click", () => {
+			navigation.classList.toggle("active");
+		});
+	</script>
+	<script src="/img/js/home.js"></script>
+</body>
+</html>
