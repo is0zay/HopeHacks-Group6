@@ -19,7 +19,9 @@ app.set("views", "./src/views");
 app.get("/support", (req,res) => {
 	res.render("support")
 })
-
+app.get("/", (req,res) => {
+	res.render("index")
+})
 // app.get('/search', (req, res) => {
 //   const options = {
 //     method: 'GET',

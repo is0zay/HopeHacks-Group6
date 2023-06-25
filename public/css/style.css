@@ -182,7 +182,7 @@ body {
 	overflow-x: hidden;
   }
 
-  .heroimg{
+  /* .heroimg{
 	display: flex;
 	flex-direction: column;
 	height: 50vh;
@@ -195,7 +195,7 @@ body {
   .herotext{
 	text-align: center;
 	font-size: 2.5rem;
-  }
+  } */
 
   .knowledgeHub {
     background-color: #526D82 !important;
