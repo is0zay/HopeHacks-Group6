@@ -3,8 +3,9 @@ const https = require('https');
 let ejs = require('ejs');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 const path = require('path');
+const { response } = require('express');
 
 app.use(express.static("public"));
 // using body parser to get user input
@@ -47,46 +48,107 @@ app.get('/submitsupport', (req, res) => {
 
 
 // USE html form to search for news
-app.get('/newssearch', (req, res) => {
-	const { issue } = req.query;
-	console.log(issue);
-  
-	const options = {
-	  method: 'GET',
-	  hostname: 'news-api14.p.rapidapi.com',
-	  port: null,
-	  path: `/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`,
-	  headers: {
-		'x-rapidapi-subscription': 'basic',
-		'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
-		'x-rapidapi-user': 'suprikurniyanto',
-		'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
-		'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
+app.get('/newssearch', async (req, res) => {
+	// const { issue } = req.query;
+
+	// const url = `https://news-api14.p.rapidapi.com/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`;
+	// const options = {
+  	// method: 'GET',
+  	// headers: {
+   	// 	'x-rapidapi-subscription': 'basic',
+    // 	'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
+    // 	'x-rapidapi-user': 'suprikurniyanto',
+    // 	'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
+   	//  	'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
+  	// }
+	// };
+
+	// fetch(url, options)
+	// .then(response => response.json())
+	// .then(data => {
+	// 	console.log(data);
+	// 	res.render('news-search', { articles:data.articles})
+	// }) 
+	// .catch(error => res.status(500).json({ error: 'An error occurred.' }));
+
+	try {
+		const { issue } = req.query;
+		const url = `https://news-api14.p.rapidapi.com/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`;
+		const options = {
+		  method: 'GET',
+		  headers: {
+			'x-rapidapi-subscription': 'basic',
+			'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
+			'x-rapidapi-user': 'suprikurniyanto',
+			'X-RapidAPI-Key': '736b426570msh3e3bea3a2046199p10b6ccjsne1a147f2cefb',
+			'X-RapidAPI-Host': 'news-api14.p.rapidapi.com',
+		  },
+		};
+	
+		const response = await fetch(url, options);
+		const data = await response.json();
+		console.log(data);
+		res.render('news-search', { articles: data.articles });
+	  } catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'An error occurred.' });
 	  }
-	};
+
+
+
+	
+	// const url = 'https://news-api14.p.rapidapi.com/search?q=lgbt&country=us&language=en&pageSize=7&from=2023-01-01';
+	// const options = {
+  	// 	method: 'GET',
+  	// 	headers: {
+    // 		'x-rapidapi-subscription': 'basic',
+    // 		'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
+    // 		'x-rapidapi-user': 'suprikurniyanto',
+    // 		'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
+    // 		'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
+  	// }
+	// };
+
+	
   
-	const apiRequest = https.request(options, (apiResponse) => {
-	  const chunks = [];
+	// const options = {
+	//   method: 'GET',
+	//   hostname: 'news-api14.p.rapidapi.com',
+	//   port: null,
+	//   path: `/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`,
+	//   headers: {
+	// 	'x-rapidapi-subscription': 'basic',
+	// 	'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
+	// 	'x-rapidapi-user': 'suprikurniyanto',
+	// 	'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
+	// 	'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
+	//   }
+	// };
   
-	  apiResponse.on('data', (chunk) => {
-		chunks.push(chunk);
-	  });
+	// const apiRequest = https.request(options, (apiResponse) => {
+	//   const chunks = [];
   
-	  apiResponse.on('end', () => {
-		const body = Buffer.concat(chunks);
-		const newsResults = JSON.parse(body.toString());
-		const newsArticles = newsResults.articles;
+	//   apiResponse.on('data', (chunk) => {
+	// 	chunks.push(chunk);
+	//   });
   
-		res.render('news-search', { articles: newsArticles });
-	  });
-	});
+	//   apiResponse.on('end', () => {
+	// 	const body = Buffer.concat(chunks);
+	// 	const newsResults = JSON.parse(body.toString());
+	// 	const newsArticles = newsResults.articles;
   
-	apiRequest.on('error', (error) => {
-	  console.error(error);
-	  res.status(500).send('An error occurred');
-	});
+	// 	res.render('news-search', { articles: newsArticles });
+	//   });
+	// });
   
-	apiRequest.end();
+	// apiRequest.on('error', (error) => {
+	//   console.error(error);
+	//   res.status(500).send('An error occurred');
+	// });
+
+
+  
+	// apiRequest.end();
   });
 
 
