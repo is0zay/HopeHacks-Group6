@@ -9,7 +9,7 @@ body {
   .nav-head {
 	width: 100vw;
 	top: 0;
-
+	position: fixed;
 	z-index: 10;
   }
   
@@ -19,7 +19,6 @@ body {
 	/* justify-content: start; */
 	align-items: center !important;
 	padding-top: 1%;
-	height: 7vh;
 	background-color: #27374dcc;
   }
   
@@ -28,7 +27,7 @@ body {
 	margin-right: 2.5%;
 	gap: 6%;
 	list-style: none;
-	color: black;
+	color: #dde6ed;
 	font-family: "Public Sans", sans-serif;
 	font-size: "80%";
 	margin-left: 2%;
@@ -58,15 +57,16 @@ body {
   }
   
   a {
-	color: black;
+	color: #dde6ed;
+	font-weight: bold;
 	text-decoration: none;
   }
 
   /* FOOTER  */
   .main-footer {
 	background-color: #27374D;
-	position: absolute;
-	bottom: -10;
+	position: relative;
+	bottom: 0;
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
@@ -165,9 +165,9 @@ body {
 	justify-content: end;
   }
 
-  /* AbOUT PAGE */
+  /* ABOUT PAGE STYLING*/
 .about-section1 {
-	margin-top: 2.5%;
+	margin-top: 7.5%;
 	display: flex;
 	justify-content: center;
 }
@@ -361,17 +361,18 @@ h3 ul{
 	}
 	
 	.nav-left {
-		
+		position: fixed !important;
 		left: -100%;
 		top: 70px;
 		gap: 0;
 		flex-direction: column;
-		/* background-color: whitesmoke; */
+		background-color: #526d82;
 		width: calc(100% / 3);
 		height: 100vh;
-		text-align: center;
+		text-align: center !important;
 		transition: 0.3s;
 		margin-left: 0px;
+		color: #dde6ed;
 	}
 	
 	.nav-left li {
@@ -380,6 +381,9 @@ h3 ul{
 	
 	.nav-left.active {
 		left: 0;
+		background-color: #27374dd1;
+		color: #dde6ed;
+		top: 7.8%;
 	}
 
 	.nav-right.active {
@@ -387,7 +391,7 @@ h3 ul{
 		}
 	
 	.nav-link {
-		color: black;
+		color: #dde6ed;
 	}
 	
 	.hamburger {
@@ -396,6 +400,7 @@ h3 ul{
 		margin-left: 2.5%;
 		cursor: pointer;
 		color: #dde6ed;
+		font-size: 1.5rem;
 	}
 	
 	.nav-middle {
@@ -419,7 +424,7 @@ h3 ul{
 	}
 
 	.about-section1 {
-		margin-top: 5%
+		margin-top: 15%
 	}
 
 	.about-hero {
@@ -499,6 +504,10 @@ h3 ul{
 	.fbr-bottom {
 		justify-content: start;
 		margin-left: 2.5%;
+	}
+
+	.about-section1 {
+		margin-top: 22.5%
 	}
 
 	.articles {

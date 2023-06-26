@@ -20,23 +20,29 @@ app.get("/", (req,res) => {
 	res.render("index")
 });
 
+app.get("/support", (req,res) => {
+	res.render('support')
+});
+
 app.get('/about', (req,res) => {
 	res.render('about')
 });
 
-app.get('/nonprofits', (req, res) => {
+app.get('/submitsupport', (req, res) => {
 	const apiKey = 'pk_live_86a419192b705c472ffaeceac186383f';
-	const searchTerm = req.query.searchTerm;
-	const url = `https://partners.every.org/v0.2/browse/lgbt?apiKey=${apiKey}`;
+	const { issue } = req.query;
+	const url = `https://partners.every.org/v0.2/browse/${issue}?apiKey=${apiKey}`;
+	console.log(issue);
   
 	fetch(url)
 	  .then(response => response.json())
 	  .then(data => {
 		
-		console.log(data.nonprofits)
+		console.log(data)
 		res.render('nonprofit', {content:data.nonprofits})
 	})
 	  .catch(error => res.status(500).json({ error: 'An error occurred.' }));
+
   });
 
 

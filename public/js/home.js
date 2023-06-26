@@ -22,3 +22,13 @@ function changeImg(){
 window.onload = changeImg;
 
 const backgroundJS = changeImg();
+
+
+//Hamburger Menu
+const hamburger = document.querySelector(".hamburger");
+const navigation = document.querySelector(".nav-left");
+
+// click event adds the class of active to display the hidden nav menu
+hamburger.addEventListener("click", () => {
+	navigation.classList.toggle("active");
+});
