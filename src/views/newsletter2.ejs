@@ -53,45 +53,49 @@
         </section>
         
         <br>
-        <div class="form-container">
-            <section class="subscribe-form">
-              <h3>Subscribe to our Newsletter</h3>
-              <form action="/subscribe" method="POST">
+        <section class="subscribe-form">
+            <h3>Subscribe to our Newsletter</h3>
+            <form action="/subscribe" method="POST">
                 <div>
-                  <label for="firstName">First Name:</label>
-                  <input type="text" id="firstName" name="firstName" required>
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
                 </div>
                 <div>
-                  <label for="lastName">Last Name:</label>
-                  <input type="text" id="lastName" name="lastName" required>
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
                 </div>
                 <div>
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" name="email" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div>
-                  <label for="password">Password:</label>
-                  <input type="password" id="password" name="password" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
                 </div>
                 <button type="submit">Subscribe</button>
-              </form>
-            </section>
-          
-            <section class="unsubscribe-form">
-              <h3>Unsubscribe from our Newsletter</h3>
-              <form action="/unsubscribe" method="POST">
+            </form>
+        </section>
+        
+        <section class="unsubscribe-form">
+            <h3>Unsubscribe from our Newsletter</h3>
+            <form action="/unsubscribe" method="POST">
                 <div>
-                  <label for="unsubscribeEmail">Email:</label>
-                  <input type="email" id="unsubscribeEmail" name="email" required>
+                    <label for="unsubscribeEmail">Email:</label>
+                    <input type="email" id="unsubscribeEmail" name="email" required>
                 </div>
                 <div>
-                  <label for="unsubscribePassword">Password:</label>
-                  <input type="password" id="unsubscribePassword" name="password" required>
+                    <label for="unsubscribePassword">Password:</label>
+                    <input type="password" id="unsubscribePassword" name="password" required>
                 </div>
                 <button type="submit">Unsubscribe</button>
-              </form>
-            </section>
-          </div>
+            </form>
+
+        </section>
+        <% if (message) { %>
+            <script>
+              alert("<%= message %>");
+            </script>
+        <% } %>
     </main>
 
 
