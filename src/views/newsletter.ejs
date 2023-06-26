@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/newsletter.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/support.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
@@ -25,8 +25,8 @@
                 <li><i class="fa-solid fa-bars"></i></li>
             </div>
             <ul class="nav-left">
-                <li><a href="index" class="nav-link">HOME</a></li>
-                <li><a href="support" class="nav-link">SUPPORT</a></li>
+                <li><a href="index.ejs" class="nav-link">HOME</a></li>
+                <li><a href="support.ejs" class="nav-link">SUPPORT</a></li>
                 <li><a href="bottoms.html" class="nav-link">ABOUT</a></li>
                 <li><a href="accessories.html" class="nav-link">REGISTER/LOGIN</a></li>    
             </ul>
@@ -38,48 +38,19 @@
            </ul>
         </nav>
     </header>
+    <!-- MY CODE -->
+    <h1>Subscribe to Newsletter</h1>
+    <form action="/subscribe" method="POST">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Subscribe</button>
+    </form>
 
-
-
-    <!-- Dre Code -->
-    <section class="supporthero">
-        <div class="supportherotext">
-            <h1>Get Involved</h1>
-        </div>
-    </section>
-    <main class="supportmain">
-        <section class="support-intro">
-            <div class="content-container">
-                 <h2>
-                How You Can Help
-                </h2>
-                <p>To support non-profit organizations in their efforts to assist minority groups facing oppression, individuals can contribute in various ways. First and foremost, one can donate their time by volunteering for these organizations. By offering their skills, knowledge, and enthusiasm, volunteers can directly engage with the affected communities and provide support in areas such as education, healthcare, legal aid, or advocacy. Additionally, financial contributions are crucial to sustaining the operations and programs of non-profits. Even small, regular donations can make a significant impact when combined with others. Sharing information about these organizations and their causes through social media platforms or personal networks can also raise awareness and help attract more support. Lastly, individuals can educate themselves about the struggles and challenges faced by minority groups to foster empathy and understanding, allowing them to become effective allies in the fight against oppression. By combining these efforts, people can make a meaningful difference in helping non-profits uplift and empower marginalized communities.</p>
-            </div>
-        </section>
-        <section class="formback">
-            <br>
-            <h2>
-                Choose a topic below to search for Non-Profit Organizations
-            </h2>
-            <br>
-            <form action="/submitsupport" method="POST" class="homeForm">
-                <label for="issue" class="homeLabel">Select an issue:</label>
-                <select name="issue" id="issue" class="homeSelect">
-                <option value="lgbt">LGBT</option>
-                <option value="poverty">Poverty</option>
-                <option value="immigrants">Immigrants</option>
-                <option value="racial-justice">Racial Justice</option>
-                <option value="veterans">Veterans</option>
-                <option value="votingrights">Voting Rights</option>
-                <option value="disabilities">Disabilities</option>
-                <option value="gender-equality">Gender Equality</option>
-                </select>
-                <br>
-                <button type="submit" class="homeButton">Submit</button>
-            </form>
-        </section> 
-    </main>
-
+    <h1>Unsubscribe from Newsletter</h1>
+    <form action="/unsubscribe" method="POST">
+      <input type="email" name="email" placeholder="Email" required>
+      <button type="submit">Unsubscribe</button>
+    </form>
 
 
 
