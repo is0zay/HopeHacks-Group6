@@ -1,0 +1,160 @@
+.hero-image {
+    position: relative;
+    height: 35vh; /* Adjust the height as needed */
+  }
+
+  .hero-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: 1;
+  }
+
+  .hero-image img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* CSS for the hero text */
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    z-index: 2;
+  }
+
+main{
+    background-color: #27374D;
+}
+
+.newsletterintro {
+    background-color: #DDE6ED;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .newsletterintro h2 {
+    color: #27374D;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .newsletterintro p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+  
+  .subscribe-form,
+  .unsubscribe-form {
+    background-color: transparent;
+    padding: 20px;
+  }
+
+  .subscribe-form {
+    background-color: #526d8244;
+    color: #27374D;
+	border-radius: 15px;
+  }
+
+  .unsubscribe-form {
+    background-color: #526d8244;
+    color: #526D82;
+	border-radius: 15px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .form-container > section {
+    flex: 1 1 300px;
+  }
+
+  @media (max-width: 768px) {
+    .newsletterintro {
+      padding: 20px;
+    }
+  
+    .newsletterintro h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+  
+    .newsletterintro p {
+      font-size: 14px;
+    }
+
+    .form-container {
+      flex-direction: column;
+    }
+  }
+
+.subscribe-form h3 {
+	color: #DDE6ED;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-bottom: 1%;
+}
+
+.unsubscribe-form h3 {
+	color: #DDE6ED;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-bottom: 1%;
+}
+
+label {
+	color: #526D82 !important;
+}
+
+form div input{
+    height: 45px;
+    width: 87%;
+    border: none;
+    border-radius: 30px;
+    color: #27374D;
+    font-size: 15px;
+    padding: 0 0 0 45px;
+    background: rgba(255,255,255,0.1);
+    outline: none;
+}
+
+.unsubscribe-form button,
+.subscribe-form button {
+	border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    height: 45px;
+    outline: none;
+    width: 100%;
+    color: #27374D;
+    background: rgba(255, 255, 255, 0.816);
+    cursor: pointer;
+    transition: .3s;
+	margin-top: 5%;
+}
+
+.unsubscribe-form button:hover,
+.subscribe-form button:hover {
+	box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-input-placeholder{
+    color: #fff;
+}
