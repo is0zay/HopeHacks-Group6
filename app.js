@@ -36,9 +36,38 @@ app.get("/", (req,res) => {
 app.get("/newsletter", (req,res) => {
 	res.render("newsletter")
 })
+// Create a Nodemailer transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'hope4change27@gmail.com',
+    pass: 'mgoycwixltslbokq',
+  },
+});
+
+
 
 app.post('/subscribe', (req, res) => {
   const { firstName, lastName, email, password } = req.body;
+
+    // Send confirmation email
+    const mailOptions = {
+      from: 'hope4change27@gmail.com',
+      to: email,
+      subject: 'Newsletter Subscription Confirmation',
+      text: `Dear ${firstName} ${lastName},\n\nThank you for subscribing to our newsletter!`,
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        res.send('An error occurred while subscribing.');
+      } else {
+        console.log('Email sent: ' + info.response);
+        res.send('Thank you for subscribing!');
+      }
+    });
+
 
   // Store subscriber data in the database
   connection.query(
@@ -53,6 +82,7 @@ app.post('/subscribe', (req, res) => {
       }
     }
   );
+
 });
 
 app.post('/unsubscribe', (req, res) => {
