@@ -106,19 +106,33 @@ app.get('/newssearch', async (req, res) => {
 // SECOND THIRD PARTY API TO SEARCH FOR NONPROFIT ORGANIZATIONS
 // GET InPUT FROM HTML FORM
 app.get('/submitsupport', (req, res) => {
+	// const apiKey = 'pk_live_86a419192b705c472ffaeceac186383f';
+	// const { issue } = req.query;
+	// const url = `https://partners.every.org/v0.2/browse/${issue}?apiKey=${apiKey}`;
+	// console.log(issue);
+  
+	// fetch(url)
+	//   .then(response => response.json())
+	//   .then(data => {
+		
+	// 	console.log(data)
+	// 	res.render('nonprofit', {content:data.nonprofits})
+	// })
+	//   .catch(error => res.status(500).json({ error: 'An error occurred.' }));
+
 	const apiKey = 'pk_live_86a419192b705c472ffaeceac186383f';
 	const { issue } = req.query;
 	const url = `https://partners.every.org/v0.2/browse/${issue}?apiKey=${apiKey}`;
 	console.log(issue);
-  
-	fetch(url)
-	  .then(response => response.json())
-	  .then(data => {
-		
-		console.log(data)
-		res.render('nonprofit', {content:data.nonprofits})
+
+	axios.get(url)
+	.then(response => {
+		const data = response.data;
+		console.log(data);
+		res.render('nonprofit', { content: data.nonprofits });
 	})
-	  .catch(error => res.status(500).json({ error: 'An error occurred.' }));
+	.catch(error => res.status(500).json({ error: 'An error occurred.' }));
+
 });
 
 // FIRST PARTY API FOR NEWSLETTER REGISTRATION
