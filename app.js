@@ -8,6 +8,7 @@ const path = require('path');
 const { response } = require('express');
 const mysql = require('mysql2');
 const nodemailer = require('nodemailer');
+const axios = require('axios');
 
 const connection = mysql.createConnection({
 	host:"sql9.freesqldatabase.com",
@@ -48,28 +49,57 @@ app.get('/newsletter', (req,res) => {
 // USE html form to search for news
 app.get('/newssearch', async (req, res) => {
 	
-	try {
-		const { issue } = req.query;
-		const url = `https://news-api14.p.rapidapi.com/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`;
-		const options = {
-		  method: 'GET',
-		  headers: {
-			'x-rapidapi-subscription': 'basic',
-			'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
-			'x-rapidapi-user': 'suprikurniyanto',
-			'X-RapidAPI-Key': '736b426570msh3e3bea3a2046199p10b6ccjsne1a147f2cefb',
-			'X-RapidAPI-Host': 'news-api14.p.rapidapi.com',
-		  },
-		};
+	// try {
+	// 	const { issue } = req.query;
+	// 	const url = `https://news-api14.p.rapidapi.com/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`;
+	// 	const options = {
+	// 	  method: 'GET',
+	// 	  headers: {
+	// 		'x-rapidapi-subscription': 'basic',
+	// 		'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
+	// 		'x-rapidapi-user': 'suprikurniyanto',
+	// 		'X-RapidAPI-Key': '736b426570msh3e3bea3a2046199p10b6ccjsne1a147f2cefb',
+	// 		'X-RapidAPI-Host': 'news-api14.p.rapidapi.com',
+	// 	  },
+	// 	};
 	
-		const response = await fetch(url, options);
-		const data = await response.json();
-		console.log(data);
-		res.render('news-search', { articles: data.articles });
-	  } catch (error) {
+	// 	const response = await fetch(url, options);
+	// 	const data = await response.json();
+	// 	console.log(data);
+	// 	res.render('news-search', { articles: data.articles });
+	//   } catch (error) {
+	// 	console.error(error);
+	// 	res.status(500).json({ error: 'An error occurred.' });
+	//   }
+
+	const { issue } = req.query;
+	const options = {
+	method: 'GET',
+	url: 'https://news-api14.p.rapidapi.com/search',
+	params: {
+		q: `${issue}`,
+		country: 'us',
+		language: 'en',
+		pageSize: '10',
+		from: '2022-06-01'
+	},
+	headers: {
+		'x-rapidapi-subscription': 'ultra',
+		'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
+		'x-rapidapi-user': 'suprikurniyanto',
+		'X-RapidAPI-Key': '736b426570msh3e3bea3a2046199p10b6ccjsne1a147f2cefb',
+		'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
+	}
+	};
+
+	try {
+		const response = await axios.request(options);
+
+		res.render('news-search', { articles: response.data.articles });
+		console.log(response.data);
+	} catch (error) {
 		console.error(error);
-		res.status(500).json({ error: 'An error occurred.' });
-	  }
+	}
 
 });
 
