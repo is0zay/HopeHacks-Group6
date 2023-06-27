@@ -94,9 +94,7 @@ app.get('/newssearch', async (req, res) => {
 
 	try {
 		const response = await axios.request(options);
-
 		res.render('news-search', { articles: response.data.articles });
-		console.log(response.data);
 	} catch (error) {
 		console.error(error);
 	}
