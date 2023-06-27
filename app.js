@@ -92,26 +92,57 @@ app.get('/submitsupport', (req, res) => {
 });
 
 // FIRST PARTY API FOR NEWSLETTER REGISTRATION
-app.post('/subscribe', (req, res) => {
+
+// Create a Nodemailer transporter
+const transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+	  user: 'hope4change27@gmail.com',
+	  pass: 'mgoycwixltslbokq',
+	},
+  });
+  
+  
+  
+  app.post('/subscribe', (req, res) => {
 	const { firstName, lastName, email, password } = req.body;
+  
+	  // Send confirmation email
+	  const mailOptions = {
+		from: 'hope4change27@gmail.com',
+		to: email,
+		subject: 'Newsletter Subscription Confirmation',
+		text: `Dear ${firstName} ${lastName},\n\nThank you for subscribing to our newsletter!`,
+	  };
+	
+	  transporter.sendMail(mailOptions, (error, info) => {
+		if (error) {
+		  console.error(error);
+		  res.send('An error occurred while subscribing.');
+		} else {
+		  console.log('Email sent: ' + info.response);
+		  res.send('Thank you for subscribing!');
+		}
+	  });
+  
   
 	// Store subscriber data in the database
 	connection.query(
 	  'INSERT INTO subscribers (firstName, lastName, email, password) VALUES (?, ?, ?, ?)',
 	  [firstName, lastName, email, password],
 	  (error, results) => {
-		
 		if (error) {
 		  console.error(error);
 		  res.render('newsletter2', { message: 'An error occurred while subscribing.' });
 		} else {
-		  res.render('newsletter2', { message: `Thank ${req.body.firstName} you for subscribing!` });
+		  res.render('newsletter2', { message: `Hello ${req.body.firstName}! Thank you for subscribing!` });
 		}
 	  }
 	);
-});
   
-app.post('/unsubscribe', (req, res) => {
+  });
+  
+  app.post('/unsubscribe', (req, res) => {
 	const { email, password } = req.body;
   
 	// Remove subscriber data from the database
@@ -129,8 +160,7 @@ app.post('/unsubscribe', (req, res) => {
 		}
 	  }
 	);
-});
-
+  });
  
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
