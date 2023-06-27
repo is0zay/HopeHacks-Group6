@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer');
 const connection = mysql.createConnection({
 	host:"sql9.freesqldatabase.com",
 	user:"sql9628983",
-	password:"password",
+	password:"JaGCwHUKhZ",
 	database:"sql9628983"
 });
 
