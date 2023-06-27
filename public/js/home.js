@@ -1,34 +1,31 @@
-let i = 0;
-const images = [];
-const time = 2000;
+document.addEventListener('DOMContentLoaded', function() {
+    var slides = document.querySelectorAll('.slide');
+    var currentSlideIndex = 0;
 
-images[0] = 'images/example1.jpeg';
-images[1] = 'images/example2.jpeg';
+    // Show the initial slide immediately
+    slides[currentSlideIndex].classList.add('visible');
 
+    function showNextSlide() {
+        // Hide the current slide
+        slides[currentSlideIndex].classList.remove('visible');
 
+        // Move to the next slide
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
 
-function changeImg(){
-    document.slide.src = images[i]
-
-    if(i < images.length - 1){
-        i++;
-    } else {
-        i = 0;
+        // Show the next slide
+        slides[currentSlideIndex].classList.add('visible');
     }
 
-    setTimeout("changeImg()", time)
-}
-
-window.onload = changeImg;
-
-const backgroundJS = changeImg();
+    // Start the slideshow after 3 seconds
+    setInterval(showNextSlide, 3000);
+});
 
 
-//Hamburger Menu
-const hamburger = document.querySelector(".hamburger");
-const navigation = document.querySelector(".nav-left");
-
-// click event adds the class of active to display the hidden nav menu
-hamburger.addEventListener("click", () => {
-	navigation.classList.toggle("active");
+document.addEventListener('DOMContentLoaded', function() {
+    var scrollDownArrow = document.querySelector('.scroll-down-arrow');
+    scrollDownArrow.addEventListener('click', function(event) {
+    event.preventDefault();
+    var nextSection = document.querySelector('#next-section');
+    nextSection.scrollIntoView({ behavior: 'smooth' });
+    });
 });
