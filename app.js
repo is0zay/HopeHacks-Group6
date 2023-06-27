@@ -10,10 +10,10 @@ const mysql = require('mysql2');
 const nodemailer = require('nodemailer');
 
 const connection = mysql.createConnection({
-	host:"localhost",
-	user:"root",
-	password:"password",
-	database:"HopeHacksNews",
+	host:"sql9.freesqldatabase.com	",
+	user:"sql9628983",
+	password:"JaGCwHUKhZ",
+	database:"sql9628983"
 });
 
 app.use(express.static("public"));
