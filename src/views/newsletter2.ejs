@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/newsletter.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/reset.css">
-    <!-- <link rel="stylesheet" href="/css/support.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
@@ -15,10 +15,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <title>Support</title>
+    <title>Sign Up</title>
 </head>
 <body>
-	<header class="nav-head">
+    <header class="nav-head">
         <nav class="main-nav">
 			<!-- The hamburger menu is created here but the display is initially hidden -->
             <div class="hamburger">
@@ -28,7 +28,7 @@
                 <li><a href="/" class="nav-link">HOME</a></li>
                 <li><a href="/support" class="nav-link">SUPPORT</a></li>
                 <li><a href="/about" class="nav-link">ABOUT</a></li>
-                <li><a href="/newsletter" class="nav-link">NEWSLETTER</a></li>    
+                <li><a href="/newsletter" class="nav-link">REGISTER/LOGIN</a></li>    
             </ul>
             <!-- <ul class="nav-middle">
                 <li class="middle-link"><a href="index.html"><img src="/images/hglogo.avif" alt="" class="head-logo"></a></li>
@@ -39,48 +39,67 @@
         </nav>
     </header>
 
-    <!-- Dre Code -->
-    
-    <main class="supportmain">
-		<section class="supporthero">
-			<div class="supportherotext">
-				<h1>Get Involved</h1>
-			</div>
-		</section>
-	<section class="support-intro">
-            <div class="content-container">
-                 <h2>
-                How You Can Help
-                </h2>
-                <p>To support non-profit organizations in their efforts to assist minority groups facing oppression, individuals can contribute in various ways. First and foremost, one can donate their time by volunteering for these organizations. By offering their skills, knowledge, and enthusiasm, volunteers can directly engage with the affected communities and provide support in areas such as education, healthcare, legal aid, or advocacy. Additionally, financial contributions are crucial to sustaining the operations and programs of non-profits. Even small, regular donations can make a significant impact when combined with others. Sharing information about these organizations and their causes through social media platforms or personal networks can also raise awareness and help attract more support. Lastly, individuals can educate themselves about the struggles and challenges faced by minority groups to foster empathy and understanding, allowing them to become effective allies in the fight against oppression. By combining these efforts, people can make a meaningful difference in helping non-profits uplift and empower marginalized communities.</p>
-            </div>
+    <!-- MY CODE -->
+    <div class="hero-image">
+        <img src="/img/Newspaper.avif" alt="Hero Image">
+        <div class="hero-text">
+            <h1>Hope 4 Change <br> Newsletter</h1>
+        </div>
+    </div>
+    <main>
+        <section class="newsletterintro">
+            <h2>"Stay Informed, Inspire Change: Join the Hope 4 Change Newsletter Community!"</h2>
+            <p>Welcome to the Hope 4 Change Newsletter, your gateway to staying informed and engaged with the latest updates, inspiring stories, and impactful initiatives in our mission for positive change. As a nonprofit organization dedicated to combating oppression and fostering social justice, we believe in the power of collective action and the strength of community. Through our newsletter, we aim to keep you connected to the heart of our work, sharing compelling narratives, thought-provoking articles, and opportunities for meaningful involvement. Whether you're seeking insightful analysis on current events, uplifting success stories, or ways to contribute to our shared vision, this newsletter is your source of inspiration and empowerment. Together, let's nurture hope, amplify voices, and create a brighter future for all. Join us on this journey of transformation and sign up today.</p>
         </section>
-			
-        <section class="formback">
-            <br>
-            <h2>
-                Choose a topic below to search for Non-Profit Organizations
-            </h2>
-            <br>
-            <form action="/submitsupport" method="GET" class="homeForm">
-                <label for="issue" class="homeLabel">Select an issue:</label>
-                <select name="issue" id="issue" class="homeSelect">
-                <option value="lgbt">LGBT</option>
-                <option value="poverty">Poverty</option>
-                <option value="immigrants">Immigrants</option>
-                <option value="racial-justice">Racial Justice</option>
-                <option value="veterans">Veterans</option>
-                <option value="votingrights">Voting Rights</option>
-                <option value="disabilities">Disabilities</option>
-                <option value="gender-equality">Gender Equality</option>
-                </select>
-                <br>
-                <button type="submit" class="homeButton">Submit</button>
-            </form>
-        </section> 
+        
+        <br>
+        <div class="form-container">
+            <section class="subscribe-form">
+              <h3>Subscribe to our Newsletter</h3>
+              <form action="/subscribe" method="POST">
+                <div>
+                  <label for="firstName">First Name:</label>
+                  <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                </div>
+                <div>
+                  <label for="lastName">Last Name:</label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                </div>
+                <div>
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+                <div>
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Subscribe</button>
+              </form>
+            </section>
+          
+            <section class="unsubscribe-form">
+              <h3>Unsubscribe from our Newsletter</h3>
+              <form action="/unsubscribe" method="POST">
+                <div>
+                  <label for="unsubscribeEmail">Email:</label>
+                  <input type="email" id="unsubscribeEmail" name="email" placeholder="Email Address" required>
+                </div>
+                <div>
+                  <label for="unsubscribePassword">Password:</label>
+                  <input type="password" id="unsubscribePassword" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Unsubscribe</button>
+              </form>
+            </section>
+          </div>
+
+        </section>
+        <% if (message) { %>
+            <script>
+              alert("<%= message %>");
+            </script>
+        <% } %>
     </main>
-
-
 
 
 

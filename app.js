@@ -6,6 +6,15 @@ const app = express();
 const port = process.env.PORT || 4000;
 const path = require('path');
 const { response } = require('express');
+const mysql = require('mysql2');
+const nodemailer = require('nodemailer');
+
+const connection = mysql.createConnection({
+	host:"localhost",
+	user:"root",
+	password:"password",
+	database:"HopeHacksNews",
+});
 
 app.use(express.static("public"));
 // using body parser to get user input
@@ -29,48 +38,16 @@ app.get('/about', (req,res) => {
 	res.render('about')
 });
 
-app.get('/submitsupport', (req, res) => {
-	const apiKey = 'pk_live_86a419192b705c472ffaeceac186383f';
-	const { issue } = req.query;
-	const url = `https://partners.every.org/v0.2/browse/${issue}?apiKey=${apiKey}`;
-	console.log(issue);
-  
-	fetch(url)
-	  .then(response => response.json())
-	  .then(data => {
-		
-		console.log(data)
-		res.render('nonprofit', {content:data.nonprofits})
-	})
-	  .catch(error => res.status(500).json({ error: 'An error occurred.' }));
-
-  });
+app.get('/newsletter', (req,res) => {
+	res.render('newsletter')
+});
 
 
+
+// FIRST THIRD PARTY API TO SEARCH FOR NEWS
 // USE html form to search for news
 app.get('/newssearch', async (req, res) => {
-	// const { issue } = req.query;
-
-	// const url = `https://news-api14.p.rapidapi.com/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`;
-	// const options = {
-  	// method: 'GET',
-  	// headers: {
-   	// 	'x-rapidapi-subscription': 'basic',
-    // 	'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
-    // 	'x-rapidapi-user': 'suprikurniyanto',
-    // 	'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
-   	//  	'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
-  	// }
-	// };
-
-	// fetch(url, options)
-	// .then(response => response.json())
-	// .then(data => {
-	// 	console.log(data);
-	// 	res.render('news-search', { articles:data.articles})
-	// }) 
-	// .catch(error => res.status(500).json({ error: 'An error occurred.' }));
-
+	
 	try {
 		const { issue } = req.query;
 		const url = `https://news-api14.p.rapidapi.com/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`;
@@ -94,142 +71,67 @@ app.get('/newssearch', async (req, res) => {
 		res.status(500).json({ error: 'An error occurred.' });
 	  }
 
-
-
-	
-	// const url = 'https://news-api14.p.rapidapi.com/search?q=lgbt&country=us&language=en&pageSize=7&from=2023-01-01';
-	// const options = {
-  	// 	method: 'GET',
-  	// 	headers: {
-    // 		'x-rapidapi-subscription': 'basic',
-    // 		'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
-    // 		'x-rapidapi-user': 'suprikurniyanto',
-    // 		'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
-    // 		'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
-  	// }
-	// };
-
-	
-  
-	// const options = {
-	//   method: 'GET',
-	//   hostname: 'news-api14.p.rapidapi.com',
-	//   port: null,
-	//   path: `/search?q=${issue}&country=us&language=en&pageSize=7&from=2023-01-01`,
-	//   headers: {
-	// 	'x-rapidapi-subscription': 'basic',
-	// 	'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
-	// 	'x-rapidapi-user': 'suprikurniyanto',
-	// 	'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
-	// 	'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
-	//   }
-	// };
-  
-	// const apiRequest = https.request(options, (apiResponse) => {
-	//   const chunks = [];
-  
-	//   apiResponse.on('data', (chunk) => {
-	// 	chunks.push(chunk);
-	//   });
-  
-	//   apiResponse.on('end', () => {
-	// 	const body = Buffer.concat(chunks);
-	// 	const newsResults = JSON.parse(body.toString());
-	// 	const newsArticles = newsResults.articles;
-  
-	// 	res.render('news-search', { articles: newsArticles });
-	//   });
-	// });
-  
-	// apiRequest.on('error', (error) => {
-	//   console.error(error);
-	//   res.status(500).send('An error occurred');
-	// });
-
-
-  
-	// apiRequest.end();
-  });
-
-
-
-app.get('/search', (req, res) => {
-  const options = {
-    method: 'GET',
-    hostname: 'news-api14.p.rapidapi.com',
-    port: null,
-    path: '/search?q=racism&country=us&language=en&pageSize=7&from=2023-01-01',
-    headers: {
-		'x-rapidapi-subscription': 'basic',
-		'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
-		'x-rapidapi-user': 'suprikurniyanto',
-		'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
-		'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
-    }
-  };
-
-  const apiRequest = https.request(options, (apiResponse) => {
-    const chunks = [];
-
-    apiResponse.on('data', (chunk) => {
-      chunks.push(chunk);
-    });
-
-    apiResponse.on('end', () => {
-      const body = Buffer.concat(chunks);
-	  const newsResults = JSON.parse(body.toString());
-      const newsArticles = newsResults.articles;
-	
-	  res.render('news-search', {articles: newsArticles});
-    });
-  });
-
-  apiRequest.on('error', (error) => {
-    console.error(error);
-    res.status(500).send('An error occurred');
-  });
-
- 
-
-  apiRequest.end();
 });
 
-// app.get('/news', (req, res) => {
-// 	const options = {
-// 	  method: 'GET',
-// 	  hostname: 'google-news-api1.p.rapidapi.com',
-// 	  port: null,
-// 	  path: '/search?language=EN&q=racism&required_props=title%2Cimage&limit=10',
-// 	  headers: {
-// 		'X-RapidAPI-Key': 'f0f9c103b4mshf65c80b6eab160fp1e155ajsna30f5f819cb6',
-// 		'X-RapidAPI-Host': 'google-news-api1.p.rapidapi.com'
-// 	  }
-// 	};
+// SECOND THIRD PARTY API TO SEARCH FOR NONPROFIT ORGANIZATIONS
+// GET InPUT FROM HTML FORM
+app.get('/submitsupport', (req, res) => {
+	const apiKey = 'pk_live_86a419192b705c472ffaeceac186383f';
+	const { issue } = req.query;
+	const url = `https://partners.every.org/v0.2/browse/${issue}?apiKey=${apiKey}`;
+	console.log(issue);
   
-// 	const request = https.request(options, (response) => {
-// 	  let responseData = '';
-  
-// 	  response.on('data', (chunk) => {
-// 		responseData += chunk;
-// 	  });
+	fetch(url)
+	  .then(response => response.json())
+	  .then(data => {
+		
+		console.log(data)
+		res.render('nonprofit', {content:data.nonprofits})
+	})
+	  .catch(error => res.status(500).json({ error: 'An error occurred.' }));
+});
 
+// FIRST PARTY API FOR NEWSLETTER REGISTRATION
+app.post('/subscribe', (req, res) => {
+	const { firstName, lastName, email, password } = req.body;
   
-// 	  response.on('end', () => {
-// 		console.log(responseData);
-// 		res.status(200).send(responseData);
-// 	  });
-// 	});
+	// Store subscriber data in the database
+	connection.query(
+	  'INSERT INTO subscribers (firstName, lastName, email, password) VALUES (?, ?, ?, ?)',
+	  [firstName, lastName, email, password],
+	  (error, results) => {
+		
+		if (error) {
+		  console.error(error);
+		  res.render('newsletter2', { message: 'An error occurred while subscribing.' });
+		} else {
+		  res.render('newsletter2', { message: `Thank ${req.body.firstName} you for subscribing!` });
+		}
+	  }
+	);
+});
   
-// 	request.on('error', (error) => {
-// 	  console.error(error);
-// 	  res.status(500).json({ error: 'Internal Server Error' });
-// 	});
+app.post('/unsubscribe', (req, res) => {
+	const { email, password } = req.body;
   
-// 	request.end();
-//   });
+	// Remove subscriber data from the database
+	connection.query(
+	  'DELETE FROM subscribers WHERE email = ? AND password = ?',
+	  [email, password],
+	  (error, results) => {
+		if (error) {
+		  console.error(error);
+		  res.render('newsletter2', { message: 'An error occurred while unsubscribing.' });
+		} else if (results.affectedRows === 0) {
+		  res.render('newsletter2', { message: 'Invalid email or password.' });
+		} else {
+		  res.render('newsletter2', { message: 'You have been unsubscribed successfully.' });
+		}
+	  }
+	);
+});
 
-// seting up routes
-  
+ 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
