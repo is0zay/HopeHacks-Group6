@@ -12,9 +12,9 @@ const axios = require('axios');
 
 const connection = mysql.createConnection({
 	host:"sql9.freesqldatabase.com",
-	user:"sql9628983",
-	password:"JaGCwHUKhZ",
-	database:"sql9628983"
+	user:"sql9630694",
+	password:"9C62wGyENZ",
+	database:"sql9630694"
 });
 
 app.use(express.static("public"));
